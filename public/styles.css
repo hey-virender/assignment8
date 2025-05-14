@@ -117,7 +117,7 @@ form[action="/"] {
   margin-top: 1.5rem;
 }
 
-.btn-container{
+.btn-container {
   margin-top: 4%;
 }
 select {
@@ -149,4 +149,17 @@ option {
   font-size: 16px;
   background-color: #fff;
   color: #333;
+}
+
+.priority-urgent {
+  color: red;
+  text-transform: capitalize;
+}
+.priority-high {
+  color: orange;
+  text-transform: capitalize;
+}
+.priority-low {
+  color: green;
+  text-transform: capitalize;
 }

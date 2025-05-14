@@ -12,7 +12,14 @@
       <li class="<%= items[i].completed ? 'done' : '' %>">
         <%= items[i].title %>
       </li>
+      <% let priorityColor = 'black'; if (items[i].priority === 'high')
+      priorityColor = 'red'; else if (items[i].priority === 'medium')
+      priorityColor = 'orange'; else if (items[i].priority === 'low')
+      priorityColor = 'green'; %>
 
+      <li class="priority-<%= items[i].priority.toLowerCase() %>">
+        <%= items[i].priority %>
+      </li>
       <form action="/edit/<%= items[i]._id %>" method="get">
         <button type="submit">✏️</button>
       </form>
