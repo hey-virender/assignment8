@@ -1,0 +1,152 @@
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f5f7fa;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header.main-header,
+footer.main-footer {
+  width: 100%;
+  padding: 1rem 2rem;
+  background-color: #2c3e50;
+  color: #fff;
+  text-align: center;
+}
+
+footer.main-footer {
+  margin-top: auto;
+}
+
+/* Centered Card */
+.box {
+  width: 90%;
+  max-width: 600px;
+  margin: 2rem auto;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Todo List Styling */
+ul {
+  list-style-type: none;
+  margin-bottom: 1.5rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.item li {
+  flex: 1;
+  margin-left: 0.8rem;
+  font-size: 1.1rem;
+}
+
+.done {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+/* Buttons */
+button {
+  padding: 0.4rem 0.8rem;
+  margin-left: 0.5rem;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+.btn-delete {
+  padding: 0.4rem 0.8rem;
+  margin-left: 0.5rem;
+  background-color: #db3434;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn-delete:hover {
+  background-color: #b92929;
+}
+
+/* Input */
+input[type="text"] {
+  padding: 0.5rem;
+  width: 70%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-right: 0.5rem;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* Form Layout */
+form {
+  display: inline;
+}
+
+form[action="/"] {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.btn-container{
+  margin-top: 4%;
+}
+select {
+  width: 100%;
+  max-width: 100px;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  font-size: 16px;
+  color: #333;
+  appearance: none; /* Removes default arrow styling */
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px 16px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+select:focus {
+  border-color: #7c3aed; /* Indigo */
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.3);
+}
+
+option {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #fff;
+  color: #333;
+}

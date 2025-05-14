@@ -1,0 +1,38 @@
+<%- include("partials/header") %>
+
+<div class="box">
+  <ul>
+    <% for(let i = 0; i < items.length; i++) { %>
+    <div class="item">
+      <form action="/toggle/<%= items[i]._id %>" method="post">
+        <input type="checkbox" name="completed" onchange="this.form.submit()"
+        <%= items[i].completed ? 'checked' : '' %> />
+      </form>
+
+      <li class="<%= items[i].completed ? 'done' : '' %>">
+        <%= items[i].title %>
+      </li>
+
+      <form action="/edit/<%= items[i]._id %>" method="get">
+        <button type="submit">✏️</button>
+      </form>
+
+      <form action="/delete/<%= items[i]._id %>" method="post">
+        <button class="btn-delete" type="submit">🗑️</button>
+      </form>
+    </div>
+    <% } %>
+  </ul>
+
+  <form action="/" method="post">
+    <input type="text" name="todo" placeholder="Enter the task" />
+    <select name="priority" required>
+      <option value="low">Low</option>
+      <option value="high">High</option>
+      <option value="urgent">Urgent</option>
+    </select>
+    <button type="submit">Add</button>
+  </form>
+</div>
+
+<%- include("partials/footer") %>

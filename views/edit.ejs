@@ -1,0 +1,19 @@
+<%- include("partials/header") %>
+
+<div class="box">
+  <h2>Edit Todo</h2>
+  <form action="/edit/<%= item._id %>" method="post">
+    <input type="text" name="todo" value="<%= item.title %>" />
+    <select name="priority" vau required>
+      <option value="low" <%= item.priority === 'low' ? 'selected' : '' %>>Low</option>
+  <option value="high" <%= item.priority === 'high' ? 'selected' : '' %>>High</option>
+  <option value="urgent" <%= item.priority === 'urgent' ? 'selected' : '' %>>Urgent</option>
+    </select>
+   <div class="btn-container">
+     <button type="submit">Save</button>
+    <a href="/"><button class="btn-delete">Cancel</button></a>
+   </div>
+  </form>
+</div>
+
+<%- include("partials/footer") %>
