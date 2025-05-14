@@ -3,7 +3,7 @@
 <div class="box">
   <h2>Edit Todo</h2>
   <form action="/edit/<%= item._id %>" method="post">
-    <input type="text" name="todo" value="<%= item.title %>" />
+    <input type="text" name="todo" value="<%= item.title %>" required />
     <select name="priority" vau required>
       <option value="low" <%= item.priority === 'low' ? 'selected' : '' %>>Low</option>
   <option value="high" <%= item.priority === 'high' ? 'selected' : '' %>>High</option>

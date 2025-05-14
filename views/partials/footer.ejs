@@ -1,5 +1,15 @@
     <footer class="main-footer">
       <p>© Virender Chauhan</p>
     </footer>
+    <script>
+  document.querySelector('form[action="/"]').addEventListener('submit', function (e) {
+    const input = this.querySelector('input[name="todo"]');
+    if (input.value.trim() === "") {
+      e.preventDefault(); // stop submission
+      alert("Task cannot be empty or just spaces.");
+    }
+  });
+</script>
+
   </body>
 </html>
