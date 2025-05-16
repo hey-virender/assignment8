@@ -2,13 +2,83 @@
       <p>© Virender Chauhan</p>
     </footer>
     <script>
-  document.querySelector('form[action="/"]').addEventListener('submit', function (e) {
-    const input = this.querySelector('input[name="todo"]');
-    if (input.value.trim() === "") {
-      e.preventDefault(); // stop submission
-      alert("Task cannot be empty or just spaces.");
+  // document.querySelector('form[action="/"]').addEventListener('submit', function (e) {
+  //   const input = this.querySelector('input[name="todo"]');
+  //   if (input.value.trim() === "") {
+  //     e.preventDefault(); // stop submission
+  //     alert("Task cannot be empty or just spaces.");
+  //   }
+  // });
+ document.addEventListener("DOMContentLoaded",()=>{
+  const editForm = document.getElementById("edit-form")
+  const toggleForms = document.querySelectorAll(".toggle-form")
+  const deleteForms = document.querySelectorAll(".delete-form")
+  if(editForm){
+    editForm.addEventListener("submit",async(e)=>{
+      e.preventDefault()
+      const id = editForm.dataset.id
+      const todo = editForm.querySelector('[name="todo"]').value.trim()
+
+      const priority = editForm.querySelector('[name="priority"]').value
+
+      console.log(id,todo,priority)
+      const res = await fetch(`/edit/${id}`,{
+        method:"PUT",
+        headers: {
+    "Content-Type": "application/json"
+  },
+        body:JSON.stringify({todo,priority})
+
+      });
+      if(res.ok){
+        window.location.href ="/"
+      }else{
+        alert("Update failed")
+      }
+    })
+  }
+  toggleForms.forEach(form=>{
+    const checkbox = form.querySelector('input[type="checkbox"]');
+    const id = form.dataset.id
+    checkbox.addEventListener("change",async()=>{
+      const completed = checkbox.checked;
+      try{
+        const res = await fetch(`/toggle/${id}`,{
+          method:"PATCH",
+           headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ completed })
+        })
+        if(!res.ok){
+          alert("Failed to update task");
+
+        }
+      }catch(err){
+        console.error("Patch error:",err)
+      }
+    })
+  })
+ deleteForms.forEach(form=>{
+  form.addEventListener("submit",async(e)=>{
+    e.preventDefault()
+    const id = form.dataset.id;
+    try {
+      const res = await fetch(`/delete/${id}`,{
+        method:"DELETE"
+      })
+      if(res.ok){
+        window.location.reload()
+      }else{
+        alert("Delete failed")
+      }
+
+    } catch (error) {
+      console.error("delete error",error)
     }
-  });
+  })
+ })
+ })
 </script>
 
   </body>

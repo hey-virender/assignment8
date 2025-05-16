@@ -7,6 +7,7 @@ dotenv.config();
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI);
 
@@ -38,8 +39,8 @@ app.get("/", async (re, res) => {
 
 app.post("/", async (req, res) => {
   const { todo, priority } = req.body;
-  if(!todo){
-    return res.status(401).send("title is required")
+  if (!todo) {
+    return res.status(401).send("title is required");
   }
   console.log("task", todo, priority);
   const newTask = new task({
@@ -50,7 +51,7 @@ app.post("/", async (req, res) => {
   res.redirect("/");
 });
 
-app.post("/toggle/:id", async (req, res) => {
+app.patch("/toggle/:id", async (req, res) => {
   const id = req.params.id;
   const existingTask = await task.findById(id);
   if (!existingTask) {
@@ -58,30 +59,38 @@ app.post("/toggle/:id", async (req, res) => {
   }
   existingTask.completed = !existingTask.completed;
   await existingTask.save();
-  res.redirect("/");
+  return res.status(200).send("Task status updated");
 });
 
-app.post("/delete/:id",async (req, res) => {
+app.delete("/delete/:id", async (req, res) => {
   const id = req.params.id;
-  await task.findByIdAndDelete(id)
-  res.redirect("/");
+  try {
+    await task.findByIdAndDelete(id);
+    return res.status(200).send("Task deleted successfully");
+  } catch (error) {
+    return res.status(500).send("Task delete failed");
+  }
 });
 
-app.get("/edit/:id",async (req, res) => {
+app.get("/edit/:id", async (req, res) => {
   const id = req.params.id;
-  const item = await task.findById(id)
-  if(!item){
-    return res.status(404).send("Task not found")
+  const item = await task.findById(id);
+  if (!item) {
+    return res.status(404).send("Task not found");
   }
   res.render("edit", { item });
 });
 
-app.post("/edit/:id", (req, res) => {
-  const id = Number(req.params.id);
-  const newText = req.body.todo;
-  const item = items.find((i) => i.id === id);
-  if (item) item.text = newText;
-  res.redirect("/");
+app.put("/edit/:id", async (req, res) => {
+  const id = req.params.id;
+  const { todo, priority } = req.body;
+  const updatedTask = await task.findByIdAndUpdate(id, {
+    title: todo,
+    priority,
+  });
+  if (updatedTask) {
+    res.status(200).send("Task updated successfully");
+  }
 });
 
 app.listen(3000, () => {

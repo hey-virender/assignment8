@@ -4,9 +4,9 @@
   <ul>
     <% for(let i = 0; i < items.length; i++) { %>
     <div class="item">
-      <form action="/toggle/<%= items[i]._id %>" method="post">
-        <input type="checkbox" name="completed" onchange="this.form.submit()"
-        <%= items[i].completed ? 'checked' : '' %> />
+      <form class="toggle-form" data-id="<%= items[i]._id %>">
+        <input type="checkbox" name="completed" <%= items[i].completed ?
+        'checked' : '' %> />
       </form>
 
       <li class="<%= items[i].completed ? 'done' : '' %>">
@@ -24,7 +24,7 @@
         <button type="submit">✏️</button>
       </form>
 
-      <form action="/delete/<%= items[i]._id %>" method="post">
+      <form class="delete-form" data-id="<%= items[i]._id %>">
         <button class="btn-delete" type="submit">🗑️</button>
       </form>
     </div>
